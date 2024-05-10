@@ -1,16 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
 import ModalForm from "./ModalForm";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAuth from "../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 function BookDetails() {
   const [book, setBook] = useState("");
+  const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const axiosBase = useAxios();
+  const { user } = useAuth();
+
+  const navigate= useNavigate()
 
   // Getting data
-  
-  useEffect(() => { const getData = async () => {
+
+  useEffect(() => {
+    const getData = async () => {
       try {
         const { data } = await axiosBase(`/books/${id}`);
         setBook(data);
@@ -22,17 +30,28 @@ function BookDetails() {
     getData();
   }, []);
 
-  const handleBorrowBook=async e=>{
+  const bookId = book._id;
+
+  const handleBorrowBook = async (e) => {
     e.preventDefault();
-    const form= e.target
-    console.log(form)
-    const name= form.name.value;
-    const email= form.email.value;
-    const borrowedDate= form.borrowedDate.value;
-    const returnDate= form.returnDate.value;
-    const borrowedBookInfo= {name,email,borrowedDate,returnDate}
-    console.log(borrowedBookInfo)
-  }
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const borrowedDate = form.borrowedDate.value;
+    const returnDate = form.returnDate.value;
+
+    const borrowedBookInfo = { name, email, borrowedDate, returnDate, bookId };
+
+    try {
+      const { data } = await axiosBase.post("/borrowedBooks", borrowedBookInfo);
+      console.log(data);
+      toast.success("This book is added in your borrowed list");
+      navigate("/borrowed-books");
+    } catch (err) {
+      toast.warning(err.response.data);
+      e.target.reset();
+    }
+  };
 
   return (
     <div>

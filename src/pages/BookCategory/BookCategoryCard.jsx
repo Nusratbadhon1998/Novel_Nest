@@ -16,6 +16,7 @@ function BookCategoryCard({ bookInfo }) {
     description,
     image,
     rating,
+    quantity
   } = bookInfo;
 
   return (
@@ -36,6 +37,7 @@ function BookCategoryCard({ bookInfo }) {
             <div className=" flex items-center gap-2 border px-1 py-2 rounded-sm text-stone-800 border-indigo-400">
               <CiLocationOn />
               <p> {category}</p>
+              <p>{quantity}</p>
             </div>
             <div className="flex gap-2 items-center">
               <div className="flex gap-1 items-center text-yellow-600">

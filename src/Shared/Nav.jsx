@@ -6,7 +6,6 @@ import useAuth from "../hooks/useAuth";
 
 function Nav() {
   const {user,logOut}= useAuth()
-  console.log(user)
   const navList = (
     <>
       <NavLink to="/all-books">All Books</NavLink>
