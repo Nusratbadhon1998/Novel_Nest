@@ -1,4 +1,10 @@
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 function AddBook() {
+  const navigate = useNavigate()
+
   const submitCss =
     "block w-full p-3 text-center rounded-lg text-stone-50 bg-gradient-to-r from-[#612bd3] to-[#6e008f]   font-semibold mt-4";
 
@@ -7,7 +13,7 @@ function AddBook() {
   const inputCss =
     "input w-full defaultValue:text-stone-800 md:max-w-lg  lg:max-w-xs placeholder:text-sm placeholder:font-semibold placeholder:text-stone-800 text-stone-800";
 
-  const handleAddSpot = (e) => {
+  const handleAddSpot = async(e) => {
     e.preventDefault();
     const form = e.target;
     const bookName = form.bookName.value;
@@ -19,7 +25,7 @@ function AddBook() {
     const image = form.image.value;
     const desc = form.desc.value;
 
-    const info = {
+    const bookInfo = {
       bookName,
       authorName,
       rating,
@@ -29,7 +35,7 @@ function AddBook() {
       desc,
       image,
     };
-    console.log(info);
+    
 
     // axios.post("https://ninja-explore-hub-server.vercel.app/touristSpots", info).then((data) => {
     //   console.log(data);
@@ -38,6 +44,18 @@ function AddBook() {
     //     form.reset();
     //   }
     // });
+
+    try {
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/books`,
+        bookInfo
+      )
+      console.log(data)
+      toast.success('Book Data Added Successfully!')
+      navigate('/')
+    } catch (err) {
+      console.log(err)
+    }
   };
 
   return (

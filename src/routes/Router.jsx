@@ -6,6 +6,7 @@ import BorrowedBooks from "../pages/BorrowedBooks/BorrowedBooks";
 import Login from "../pages/Authentication/Login";
 import Register from "../pages/Authentication/Register";
 import AddBook from "../pages/AddBook/AddBook";
+import BookCategory from "../pages/BookCategory/BookCategory";
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +38,11 @@ export const router = createBrowserRouter([
       {
         path:"/register",
         element:<Register></Register>
+      },
+      {
+        path:"/book-categories/:categoryName",
+        element:<BookCategory></BookCategory>,
+        loader:({params})=>fetch(`${import.meta.env.VITE_BASE_URL}/categories/${params.categoryName}`)
       }
     ],
   },
