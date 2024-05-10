@@ -6,7 +6,7 @@ import Footer from "../Shared/Footer";
 function MainLayout() {
   return (
     <div>
-      <div className="max-w-6xl mx-auto min-h-96">
+      <div className="max-w-6xl mx-auto ">
         <Nav></Nav>
         <div className="min-h-[calc(100vh-372px)]">
           <Outlet></Outlet>

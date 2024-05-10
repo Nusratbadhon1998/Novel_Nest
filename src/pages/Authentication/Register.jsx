@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { HiOutlineEyeOff } from "react-icons/hi";
 import { HiOutlineEye } from "react-icons/hi";
 import { toast } from "react-toastify";
-import { AuthContext } from "../../providers/AuthPovider";
+import { AuthContext } from "../../providers/AuthProvider";
 
 function Register() {
   const [showPass, setShowPass] = useState(false);

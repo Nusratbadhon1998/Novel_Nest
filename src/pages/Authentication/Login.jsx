@@ -1,16 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, {  useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { HiOutlineEyeOff } from "react-icons/hi";
 import { HiOutlineEye } from "react-icons/hi";
 // import { Helmet } from "react-helmet-async";
 import { toast } from "react-toastify";
-import { AuthContext } from "../../providers/AuthPovider";
+import useAuth from "../../hooks/useAuth";
 
 function Login() {
   const [showPass, setShowPass] = useState(false);
 
-  const { signIn, googleSignIn, gitSignIn,user,setUser } =
-    useContext(AuthContext);
+  const { signIn, googleSignIn, gitSignIn,user,setUser } =useAuth()
 
   const [error, setError] = useState("");
 
