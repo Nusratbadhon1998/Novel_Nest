@@ -37,13 +37,6 @@ function AddBook() {
     };
     
 
-    // axios.post("https://ninja-explore-hub-server.vercel.app/touristSpots", info).then((data) => {
-    //   console.log(data);
-    //   if (data.data.insertedId) {
-    //     toast.success("Successfully added tourist spot in database");
-    //     form.reset();
-    //   }
-    // });
 
     try {
       const { data } = await axios.post(

@@ -29,8 +29,11 @@ function BookDetails() {
 
     getData();
   }, []);
+  const {
+    name:bookName,category,image,_id:bookId,quantity
+  }=book
 
-  const bookId = book._id;
+//   const bookId = book._id;
 
   const handleBorrowBook = async (e) => {
     e.preventDefault();
@@ -39,8 +42,9 @@ function BookDetails() {
     const email = form.email.value;
     const borrowedDate = form.borrowedDate.value;
     const returnDate = form.returnDate.value;
+   
 
-    const borrowedBookInfo = { name, email, borrowedDate, returnDate, bookId };
+    const borrowedBookInfo = { name, email, borrowedDate, returnDate, bookId ,bookName,image,category};
 
     try {
       const { data } = await axiosBase.post("/borrowedBooks", borrowedBookInfo);
@@ -57,6 +61,7 @@ function BookDetails() {
     <div>
       BookDetails: {book.name}
       <button
+      disabled={quantity===0}
         className="btn"
         onClick={() => document.getElementById("my_modal_5").showModal()}
       >
