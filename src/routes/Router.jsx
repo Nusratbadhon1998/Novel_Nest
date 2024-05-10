@@ -7,6 +7,8 @@ import Login from "../pages/Authentication/Login";
 import Register from "../pages/Authentication/Register";
 import AddBook from "../pages/AddBook/AddBook";
 import BookCategory from "../pages/BookCategory/BookCategory";
+import BookDetails from "../pages/BookDetails/BookDetails";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -42,7 +44,10 @@ export const router = createBrowserRouter([
       {
         path:"/book-categories/:categoryName",
         element:<BookCategory></BookCategory>,
-        loader:({params})=>fetch(`${import.meta.env.VITE_BASE_URL}/categories/${params.categoryName}`)
+      },
+      {
+        path:'/book-details/:id',
+        element:<PrivateRoute><BookDetails></BookDetails></PrivateRoute>
       }
     ],
   },

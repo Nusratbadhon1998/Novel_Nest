@@ -2,8 +2,11 @@ import { FaRegHeart } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 
 import { GiSpellBook } from "react-icons/gi";
+import useAuth from "../hooks/useAuth";
 
 function Nav() {
+  const {user,logOut}= useAuth()
+  console.log(user)
   const navList = (
     <>
       <NavLink to="/all-books">All Books</NavLink>
@@ -17,7 +20,7 @@ function Nav() {
       {/* Upper Part Nav */}
       <div className="navbar bg-base-100 hidden lg:flex ">
         <div className="flex-1">
-          <a className="btn btn-ghost text-xl">Novel Nest</a>
+          <Link to='/' className="btn btn-ghost text-xl">Novel Nest</Link>
         </div>
         <div className="flex-none">
           <div className="dropdown dropdown-end">
@@ -47,7 +50,7 @@ function Nav() {
               </div>
             </div>
           </div>
-          <div className="dropdown dropdown-end">
+          {user? <div className="dropdown dropdown-end">
             <div
               tabIndex={0}
               role="button"
@@ -56,7 +59,7 @@ function Nav() {
               <div className="w-10 rounded-full">
                 <img
                   alt="Tailwind CSS Navbar component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                  src={user.photoURL}
                 />
               </div>
             </div>
@@ -74,10 +77,11 @@ function Nav() {
                 <a>Settings</a>
               </li>
               <li>
-                <a>Logout</a>
+                <a onClick={logOut}>Logout</a>
               </li>
             </ul>
-          </div>
+          </div>:<button>Login</button>}
+          {/*  */}
         </div>
       </div>
       {/* Lower Part Nav */}

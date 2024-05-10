@@ -14,10 +14,8 @@ function BookCategoryCard({ bookInfo }) {
     author,
     category,
     description,
-    contents,
     image,
     rating,
-    quantity,
   } = bookInfo;
 
   return (
@@ -53,7 +51,7 @@ function BookCategoryCard({ bookInfo }) {
           </div>
           <div className="card-actions w-full justify-center">
             <Link
-              to={`/tourist-spot-details/${_id}`}
+              to={`/book-details/${_id}`}
               className="btn text-stone-800 bg-gradient-to-r from-[#612bd3] to-[#6e008f] "
             >
               View Details
