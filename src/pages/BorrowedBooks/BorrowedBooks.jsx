@@ -3,43 +3,49 @@ import useAuth from "../../hooks/useAuth";
 import useAxios from "../../hooks/useAxios";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import RingLoader from "react-spinners/RingLoader";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 function BorrowedBooks() {
-  const { user, isLoading } = useAuth();
+  const { user, loading } = useAuth();
   const [borrowedBooks, setBorrowedBooks] = useState([]);
-  const axiosBase = useAxios();
-  const [email, setEmail] = useState("");
-  // const axiosSecure= useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
-    if (user) setEmail(user?.email || " ");
-  }, []);
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
+    const getData = async () => {
+      try {
+        if (user) {
+          const { data } = await axiosSecure(`/borrowedBooks/${user.email}`);
+          setBorrowedBooks([...data]);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
 
-  useEffect(() => {
-    try {
-      getData();
-    } catch (err) {}
-  }, []);
-
-  const getData = async () => {
-    const { data } = await axiosBase(`/borrowedBooks/${user.email}`);
-    setBorrowedBooks([...data]);
-  };
+    getData();
+  }, [user]); 
 
   const handleReturn = async (id) => {
     try {
-      const { data } = await axiosBase.delete(`/borrowedBooks/${id}`);
+      const { data } = await axiosSecure.delete(`/borrowedBooks/${id}`);
       if (data.deletedCount) {
-        getData();
-        toast.success("Returned the book")
+        const updatedBooks = borrowedBooks.filter((book) => book.bookId !== id);
+        setBorrowedBooks(updatedBooks);
+        toast.success("Returned the book");
       }
     } catch (err) {
       console.log(err);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[400px]">
+        <RingLoader color="#6323c6" loading={loading} size={100} speedMultiplier={1} />
+      </div>
+    );
+  }
 
   return (
     <div className="overflow-x-auto">
@@ -59,33 +65,31 @@ function BorrowedBooks() {
             </tr>
           </thead>
           <tbody>
-            {borrowedBooks.map((book) => {
-              return (
-                <tr key={book.bookId}>
-                  <td>
-                    <div className="flex items-center gap-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle w-32 h-32 ">
-                          <img className="w-16 h-16" src={book.image} />
-                        </div>
+            {borrowedBooks.map((book) => (
+              <tr key={book.bookId}>
+                <td>
+                  <div className="flex items-center gap-3">
+                    <div className="avatar">
+                      <div className="mask mask-squircle w-32 h-32">
+                        <img className="w-16 h-16" src={book.image} alt={book.bookName} />
                       </div>
                     </div>
-                  </td>
-                  <td>{book.bookName}</td>
-                  <td>{book.category}</td>
-                  <td>{book.borrowedDate}</td>
-                  <td>{book.returnDate}</td>
-                  <th>
-                    <button
-                      onClick={() => handleReturn(book.bookId)}
-                      className="btn btn-ghost btn-xs"
-                    >
-                      Return
-                    </button>
-                  </th>
-                </tr>
-              );
-            })}
+                  </div>
+                </td>
+                <td>{book.bookName}</td>
+                <td>{book.category}</td>
+                <td>{book.borrowedDate}</td>
+                <td>{book.returnDate}</td>
+                <th>
+                  <button
+                    onClick={() => handleReturn(book.bookId)}
+                    className="btn btn-ghost btn-xs"
+                  >
+                    Return
+                  </button>
+                </th>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

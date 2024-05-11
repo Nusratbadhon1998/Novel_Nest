@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 function AddBook() {
   const navigate = useNavigate()
+  const axiosSecure= useAxiosSecure()
 
   const submitCss =
     "block w-full p-3 text-center rounded-lg text-stone-50 bg-gradient-to-r from-[#612bd3] to-[#6e008f]   font-semibold mt-4";
@@ -39,10 +41,7 @@ function AddBook() {
 
 
     try {
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/books`,
-        bookInfo
-      )
+      const { data } = await axiosSecure.post("/books",bookInfo)
       console.log(data)
       toast.success('Book Data Added Successfully!')
       navigate('/')

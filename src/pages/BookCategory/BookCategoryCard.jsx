@@ -7,7 +7,7 @@ import Rating from "react-rating";
 
 import { Link } from "react-router-dom";
 
-function BookCategoryCard({ bookInfo }) {
+function BookCategoryCard({ bookInfo,fromAll }) {
   const {
     _id,
     name,
@@ -52,12 +52,14 @@ function BookCategoryCard({ bookInfo }) {
             </div>
           </div>
           <div className="card-actions w-full justify-center">
-            <Link
+          {fromAll ? <Link to={`/update/${_id}`}>Update</Link>: <Link
               to={`/book-details/${_id}`}
               className="btn text-stone-800 bg-gradient-to-r from-[#612bd3] to-[#6e008f] "
             >
               View Details
-            </Link>
+            </Link>}
+           
+            
           </div>
         </div>
       </div>

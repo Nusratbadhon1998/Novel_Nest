@@ -47,7 +47,7 @@ function BookDetails() {
     const borrowedBookInfo = { name, email, borrowedDate, returnDate, bookId ,bookName,image,category};
 
     try {
-      const { data } = await axiosBase.post("/borrowedBooks", borrowedBookInfo);
+      const { data } = await axiosSecure.post("/borrowedBooks", borrowedBookInfo);
       console.log(data);
       toast.success("This book is added in your borrowed list");
       navigate("/borrowed-books");
