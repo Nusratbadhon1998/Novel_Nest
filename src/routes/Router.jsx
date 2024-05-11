@@ -22,38 +22,61 @@ export const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path:'/all-books',
-        element:<AllBooks></AllBooks>
+        path: "/all-books",
+        element: (
+          <PrivateRoute>
+            <AllBooks></AllBooks>,
+          </PrivateRoute>
+        ),
       },
       {
-        path:"/add-books",
-        element:<AddBook></AddBook>
-
+        path: "/add-books",
+        element: (
+          <PrivateRoute>
+            <AddBook></AddBook>
+          </PrivateRoute>
+        ),
       },
       {
-        path:'/borrowed-books',
-        element:<BorrowedBooks></BorrowedBooks>
+        path: "/borrowed-books",
+        element: (
+          <PrivateRoute>
+            <BorrowedBooks></BorrowedBooks>
+          </PrivateRoute>
+        ),
       },
       {
-        path:"/login",
-        element:<Login></Login>
+        path: "/login",
+        element: <Login></Login>,
       },
       {
-        path:"/register",
-        element:<Register></Register>
+        path: "/register",
+        element: <Register></Register>,
       },
       {
-        path:"/book-categories/:categoryName",
-        element:<BookCategory></BookCategory>,
+        path: "/book-categories/:categoryName",
+        element: (
+          <PrivateRoute>
+            <BookCategory></BookCategory>
+          </PrivateRoute>
+        ),
       },
       {
-        path:'/book-details/:id',
-        element:<PrivateRoute><BookDetails></BookDetails></PrivateRoute>
+        path: "/book-details/:id",
+        element: (
+          <PrivateRoute>
+            <BookDetails></BookDetails>
+          </PrivateRoute>
+        ),
       },
       {
-        path:"/update/:id",
-        element:<Update></Update>
-      }
+        path: "/update/:id",
+        element: (
+          <PrivateRoute>
+            <Update></Update>
+          </PrivateRoute>
+        ),
+      },
     ],
   },
 ]);
