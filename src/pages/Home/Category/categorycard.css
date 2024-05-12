@@ -1,0 +1,14 @@
+#parent:hover #name {
+    font-size: 25px !important;
+    transform: translateY(-30px) !important;
+    transition: font-size  ease, transform 0.3s ease;
+}
+
+#parent:hover #explore {
+    font-size: 25px !important;
+    transform: translateY(-30px) !important;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    transition: font-size 0.3s ease, transform 0.3s ease;
+}

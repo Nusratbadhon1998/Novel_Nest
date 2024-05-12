@@ -1,12 +1,15 @@
-import React from "react";
-import Slider from "./Slider";
 import Category from "./Category/Category";
+import Hero from "./Hero";
+import Pick from "./Pick";
+import Stats from "./Stats";
 
 function Home() {
   return (
     <div>
-        <Slider></Slider>
-        <Category>Choose Your Category</Category>
+      <Hero></Hero>
+      <Category></Category>
+      <Pick></Pick>
+      <Stats></Stats>
     </div>
   );
 }

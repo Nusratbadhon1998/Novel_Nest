@@ -13,7 +13,8 @@ export default {
       'yellow': '#F4CE14',
       'sage': '#495E57',
       'ash':'#45474B',
-      'beige':'#F5F7F8'
+      'beige':'#F5F7F8',
+      'black':"#000000"
      
     },
     fontFamily: {
