@@ -92,7 +92,7 @@ function Types() {
       <div className="flex w-full justify-center pt-12 px-4">
         <div className="w-full max-w-6xl mx-auto">
           <TabGroup>
-            <TabList className="flex gap-4 justify-center my-9 *:bg-sage  *:text-yellow *:dark:bg-beige *:shadow-xl *:px-4 *:py-2 ">
+            <TabList className="flex gap-4 justify-center my-9 *:bg-sage  *:text-black *:font-semibold *:dark:bg-beige *:shadow-xl *:px-4 *:py-2 ">
               <Tab className="hover:text-yellow hover:underline hover:transition hover:duration-200">New Release</Tab>
               <Tab>Award Winners</Tab>
               <Tab>Best Sellers</Tab>
