@@ -20,7 +20,7 @@ function BookDetails() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const { data } = await axiosBase(`/books/${id}`);
+        const { data } = await axiosSecure(`/books/${id}`);
         setBook(data);
       } catch (err) {
         console.log(err);
@@ -32,6 +32,7 @@ function BookDetails() {
   const {
     name:bookName,category,image,_id:bookId,quantity
   }=book
+
 
 //   const bookId = book._id;
 

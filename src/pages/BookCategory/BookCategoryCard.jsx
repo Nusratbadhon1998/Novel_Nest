@@ -26,15 +26,15 @@ function BookCategoryCard({ bookInfo,fromAll }) {
           <img className="aspect-[4/3]" src={image} />
         </figure>
         <div className="card-body space-y-3 flex-grow">
-          <h2 className="card-title text-stone-800">
+          <h2 className="card-title text-stone-800 dark:text-white">
             {name}
-            <div className="badge text-stone-800 bg-gradient-to-r from-[#612bd3] to-[#6e008f] py-4 outline-none border-none">
+            <div className="badge text-stone-800 dark:text-white  bg-gradient-to-r from-[#612bd3] to-[#6e008f] py-4 outline-none border-none">
               {author}
             </div>
           </h2>
-          <p className="text-stone-800">{description}</p>
+          <p className="text-stone-800 dark:text-white">{description}</p>
           <div className=" *:font-medium flex justify-between items-center">
-            <div className=" flex items-center gap-2 border px-1 py-2 rounded-sm text-stone-800 border-indigo-400">
+            <div className=" flex items-center gap-2 border px-1 py-2 rounded-sm text-stone-800 dark:text-white border-indigo-400">
               <CiLocationOn />
               <p> {category}</p>
               <p>{quantity}</p>
@@ -52,9 +52,9 @@ function BookCategoryCard({ bookInfo,fromAll }) {
             </div>
           </div>
           <div className="card-actions w-full justify-center">
-          {fromAll ? <Link to={`/update/${_id}`}>Update</Link>: <Link
+          {fromAll ? <Link className="dark:text-base-100" to={`/update/${_id}`}>Update</Link>: <Link
               to={`/book-details/${_id}`}
-              className="btn text-stone-800 bg-gradient-to-r from-[#612bd3] to-[#6e008f] "
+              className="btn text-stone-800 dark:text-white bg-gradient-to-r from-[#612bd3] to-[#6e008f] "
             >
               View Details
             </Link>}

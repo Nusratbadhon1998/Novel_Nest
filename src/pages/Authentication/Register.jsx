@@ -15,7 +15,7 @@ function Register() {
   const [success, setSuccess] = useState(null);
   // for password validation
   const uppercaseRegex = /[A-Z]/;
-  const lowercaseRegex = /[a-z]/;
+  const specialCharRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
   const minSixCharsRegex = /^.{6,}$/;
 
   const navigate = useNavigate();
@@ -32,7 +32,6 @@ function Register() {
     const email = form.email.value;
     const photo = form.photo.value;
     const password = form.password.value;
-    console.log(userName, email, photo, password);
     try {
       if (!uppercaseRegex.test(password)) {
         toast.error("Password should contain at-least one uppercase", {
@@ -41,7 +40,7 @@ function Register() {
         }),
           setError("Password should contain at-least one uppercase");
         return;
-      } else if (!lowercaseRegex.test(password)) {
+      } else if (!specialCharRegex.test(password)) {
         toast.error("Password should contain at-least one lowercase", {
             position: "top-right",
             autoClose: 2000,
