@@ -1,6 +1,6 @@
 import Category from "./Category/Category";
 import Hero from "./Hero";
-import Pick from "./Pick";
+import Pick from "./PickBy/Pick";
 import Stats from "./Stats";
 
 function Home() {
