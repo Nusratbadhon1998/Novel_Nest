@@ -27,7 +27,7 @@ function Nav() {
   }, [theme]);
 
   const beforeActive = " text-yellow underline-transition hover:no-underline";
-  const afterActive = "text-black underline-transition hover:no-underline";
+  const afterActive = "text-black  underline-transition hover:no-underline";
 
   const navList = (
     <>

@@ -6,6 +6,7 @@
   .underline-transition::after {
     content: '';
     position: absolute;
+    margin-top: 4px;
     bottom: 0;
     left: 0;
     width: 100%;
