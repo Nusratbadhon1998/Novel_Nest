@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import useAxios from "../../hooks/useAxios";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import RingLoader from "react-spinners/RingLoader";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { LuBookOpenCheck } from "react-icons/lu";
+import NoBorrowedBooks from "./NoBorrowedBooks";
+import { FaAnglesRight } from "react-icons/fa6";
 
 function BorrowedBooks() {
   const { user, loading } = useAuth();
@@ -24,7 +26,7 @@ function BorrowedBooks() {
     };
 
     getData();
-  }, [user]); 
+  }, [user]);
 
   const handleReturn = async (id) => {
     try {
@@ -42,56 +44,77 @@ function BorrowedBooks() {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
-        <RingLoader color="#6323c6" loading={loading} size={100} speedMultiplier={1} />
+        <RingLoader
+          color="#6323c6"
+          loading={loading}
+          size={100}
+          speedMultiplier={1}
+        />
       </div>
     );
   }
 
+  if (borrowedBooks.length <= 0) return <NoBorrowedBooks></NoBorrowedBooks>;
   return (
-    <div className="overflow-x-auto">
-      <div className="overflow-x-auto">
-        <table className="table">
-          {/* head */}
-          <thead className="text-stone-900">
-            <tr>
-              <th></th>
-              <th>Name</th>
-              <th>Category</th>
-              <th>Borrowed Date</th>
-              <th>Return Date</th>
-              <th></th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {borrowedBooks.map((book) => (
-              <tr key={book.bookId}>
-                <td>
-                  <div className="flex items-center gap-3">
-                    <div className="avatar">
-                      <div className="mask mask-squircle w-32 h-32">
-                        <img className="w-16 h-16" src={book.image} alt={book.bookName} />
+    <div>
+      {" "}
+      <div className="bg-black h-52 flex flex-col justify-center items-center mt-12 text-beige">
+        <h1 className="text-4xl font-bold">Borrowed Books</h1>
+        <div className="flex gap-2 items-center font-extralight text-sm">
+          <Link to="/">Home</Link>
+          <FaAnglesRight />
+          <Link>Borrowed Books</Link>
+        </div>
+      </div>
+      <div className="overflow-x-auto my-20">
+        <div className="overflow-x-auto">
+          <table className="table font-bold">
+            {/* head */}
+            <thead className="text-stone-900">
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Borrowed Date</th>
+                <th>Return Date</th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {borrowedBooks.map((book) => (
+                <tr key={book.bookId}>
+                  <td>
+                    <div className="flex items-center gap-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle w-32 h-32">
+                          <img
+                            className="w-16 h-16"
+                            src={book.image}
+                            alt={book.bookName}
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </td>
-                <td>{book.bookName}</td>
-                <td>{book.category}</td>
-                <td>{book.borrowedDate}</td>
-                <td>{book.returnDate}</td>
-                <th>
-                  <button
-                    onClick={() => handleReturn(book.bookId)}
-                    className="btn btn-ghost btn-xs"
-                  >
-                    Return
-                  </button>
-                </th>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                  </td>
+                  <td>{book.bookName}</td>
+                  <td>{book.category}</td>
+                  <td>{book.borrowedDate}</td>
+                  <td>{book.returnDate}</td>
+                  <th>
+                    <button
+                      onClick={() => handleReturn(book.bookId)}
+                      className="px-4 py-2 flex items-center"
+                    >
+                      <LuBookOpenCheck className="w-8 h-8" />
+                    </button>
+                  </th>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

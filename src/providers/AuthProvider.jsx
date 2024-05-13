@@ -43,12 +43,14 @@ function AuthProvider({ children }) {
             console.log("token response", res.data);
           });
       } else {
-        axiosSecure("/logout",loggedUser)
+
+        axiosSecure.post("/logout",loggedUser)
           .then((res) => {
             console.log(res.data);
           });
       }
     });
+    
     return () => {
       return unsubscribe();
     };

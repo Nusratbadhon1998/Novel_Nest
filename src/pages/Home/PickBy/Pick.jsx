@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useAxios from "../../../hooks/useAxios";
 import PickCard from "./PickCard";
+import axios from "axios";
 
 function Pick() {
   const axiosBase = useAxios();
@@ -8,7 +9,7 @@ function Pick() {
 
   useEffect(() => {
     const getData = async () => {
-      const { data } = await axiosBase("pickedBooks");
+      const { data } = await axios.get("https://novel-nest-server.vercel.app/pickedBooks");
       setBooks(data);
     };
     getData();

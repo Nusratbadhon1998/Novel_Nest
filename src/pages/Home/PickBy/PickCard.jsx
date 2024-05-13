@@ -13,11 +13,11 @@ function PickCard({ book }) {
             `url(${book.image})`,
         }}
       />
-      <div className="w-56 z-50 -mt-8 overflow-hidden bg-white rounded-lg shadow-lg md:w-64 dark:bg-gray-800">
+      <div className="w-56 z-40 -mt-8 overflow-hidden bg-white rounded-lg shadow-lg md:w-64 dark:bg-gray-800">
        
         <div className="bg-beige flex flex-col justify-center items-center">
-          <h1>{book.name}</h1>
-          <p>{book.author}</p>
+          <h1 className="font-bold">{book.name}</h1>
+          <p className="italic">{book.author}</p>
           <Rating
                   emptySymbol={<FaRegStar className="text-yellow" />}
                   fullSymbol={<FaStar className="text-yellow" />}

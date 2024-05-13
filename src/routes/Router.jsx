@@ -10,12 +10,13 @@ import BookCategory from "../pages/BookCategory/BookCategory";
 import BookDetails from "../pages/BookDetails/BookDetails";
 import PrivateRoute from "./PrivateRoute";
 import Update from "../pages/Update/Update";
+import ErrorPage from "../pages/Error/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
-    errorElement: <div>Error</div>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         index: true,

@@ -28,7 +28,7 @@ function CategoryCard({ category }) {
             to={`/book-categories/${category.categoryName}`}
             className="text-beige font-bold hidden"
           >
-            Explore{" "}
+            Explore
             <span>
               <FaArrowRight />
             </span>

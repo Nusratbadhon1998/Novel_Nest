@@ -4,6 +4,7 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import PickCard from "./PickBy/PickCard";
 import { NavLink } from "react-router-dom";
 import "../../Shared/nav.css";
+import axios from "axios";
 const categories = [
   {
     name: "Recent",
@@ -70,7 +71,7 @@ function Types() {
 
   useEffect(() => {
     const getData = async () => {
-      const { data } = await axiosBase("pickedBooks");
+      const { data } = await axios.get("https://novel-nest-server.vercel.app/pickedBooks");
       setBooks(data);
     };
     getData();

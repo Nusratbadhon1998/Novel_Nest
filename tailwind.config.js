@@ -14,7 +14,10 @@ export default {
       'sage': '#495E57',
       'ash':'#45474B',
       'beige':'#F5F7F8',
-      'black':"#000000"
+      'black':"#000000",
+      'green':'#00FF00 ',
+      'red':'#FF0000',
+      'white':'#FFFFFF',
      
     },
     fontFamily: {

@@ -1,24 +1,16 @@
 import { CiLocationOn } from "react-icons/ci";
-import { MdOutlineAttachMoney, MdPerson4 } from "react-icons/md";
+import { MdPerson4 } from "react-icons/md";
 import { FaRegStar } from "react-icons/fa";
 import { FaStar } from "react-icons/fa6";
+import { CgUnavailable } from "react-icons/cg";
 
 import Rating from "react-rating";
 
 import { Link } from "react-router-dom";
-import { CgUnavailable } from "react-icons/cg";
 
-function BookCategoryCard({ bookInfo,fromAll }) {
-  const {
-    _id,
-    name,
-    author,
-    category,
-    description,
-    image,
-    rating,
-    quantity
-  } = bookInfo;
+
+function BookCard({ bookInfo, handleDelete }) {
+  const { _id, name, author, category, image, rating, quantity } = bookInfo;
 
   return (
     <div className="w-full mb-20">
@@ -28,7 +20,7 @@ function BookCategoryCard({ bookInfo,fromAll }) {
         </figure>
         <div className="absolute bg-yellow px-4 py-2 font-bold rounded-r">
           {quantity > 0 ? (
-            <p className="text-black">Available</p>
+            <p className="text-black">Available {quantity} pieces</p>
           ) : (
             <p className="text-red flex items-center">
               <CgUnavailable className="text-red" />
@@ -55,11 +47,12 @@ function BookCategoryCard({ bookInfo,fromAll }) {
               />
             </div>
           </div>
-          <div className="card-actions w-full flex justify-center">
-            <Link className="border-black bg-black w-full text-white text-center border px-3 py-2" to={`/book-details/${_id}`}>
-              Details
+          <div className="card-actions w-full flex justify-between">
+            <Link className="border-black border px-3 py-2" to={`/update/${_id}`}>
+              Update
             </Link>
 
+            <button className="border-black border px-3 py-2" onClick={() => handleDelete(_id)}>Delete</button>
           </div>
         </div>
       </div>
@@ -67,4 +60,4 @@ function BookCategoryCard({ bookInfo,fromAll }) {
   );
 }
 
-export default BookCategoryCard;
+export default BookCard;

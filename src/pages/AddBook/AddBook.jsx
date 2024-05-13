@@ -1,21 +1,23 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Typewriter } from "react-simple-typewriter";
+import { FaAnglesRight } from "react-icons/fa6";
 
 function AddBook() {
-  const navigate = useNavigate()
-  const axiosSecure= useAxiosSecure()
+  const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
 
   const submitCss =
-    "block w-full p-3 text-center rounded-lg text-stone-50 bg-gradient-to-r from-[#612bd3] to-[#6e008f]   font-semibold mt-4";
+    "block w-full p-3 text-center rounded-lg text-beige bg-black font-semibold mt-4";
 
-  const labelCss = "block text-stone-800 font-semibold text-base ";
+  const labelCss = "block  font-semibold text-base ";
 
   const inputCss =
-    "input w-full defaultValue:text-stone-800 md:max-w-lg  lg:max-w-xs placeholder:text-sm placeholder:font-semibold placeholder:text-stone-800 text-stone-800";
+    "input w-full border border-yellow defaultValue:text-stone-800 md:max-w-lg  lg:max-w-xs placeholder:text-sm placeholder:font-semibold placeholder:text-stone-800 text-stone-800";
 
-  const handleAddSpot = async(e) => {
+  const handleAddSpot = async (e) => {
     e.preventDefault();
     const form = e.target;
     const bookName = form.bookName.value;
@@ -27,6 +29,11 @@ function AddBook() {
     const image = form.image.value;
     const desc = form.desc.value;
 
+    if (parseInt(rating) < 1 || parseInt(rating) > 5) {
+      toast.warning("Please provide rating between 1-5");
+      return;
+    }
+
     const bookInfo = {
       bookName,
       authorName,
@@ -37,38 +44,41 @@ function AddBook() {
       desc,
       image,
     };
-    
-
 
     try {
-      const { data } = await axiosSecure.post("/books",bookInfo)
-      console.log(data)
-      toast.success('Book Data Added Successfully!')
-      navigate('/')
+      const { data } = await axiosSecure.post("/books", bookInfo);
+      console.log(data);
+      toast.success("Book Data Added Successfully!");
+      navigate("/");
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   };
 
   return (
-    <div className="bg-[url(https://blush.design/api/download?shareUri=aZhNm7MrStKsvxDp&c=Bottom_0%7E342a83_Hair_0%7E2c1b18_Skin_0%7Edcae92_Top_0%7Eff4133&w=800&h=800&fm=png)] bg-opacity-50 bg-no-repeat bg-right">
-      <div className="w-3/4 mx-auto my-12">
-        <h1 className="text-stone-100 font-bold text-center my-8 text-4xl">
-          {/* <Typewriter
+
+    
+    <div className=" bg-opacity-0 bg-no-repeat bg-right py-6">
+     <div className="bg-black h-52 flex flex-col justify-center items-center mt-12 text-beige">
+      <div className="text-center text-xl lg:text-4xl font-semibold my-6">
+          <Typewriter
             cursor
             cursorBlinking
             delaySpeed={1000}
             deleteSpeed={25}
             loop={1}
             typeSpeed={70}
-            words={[
-              "Unlock Your Wanderlust: Add your Destination and Spice Up Your Travel Plans!",
-            ]}
-          /> */}
-        </h1>
+            words={["Empower Readers: Add to the Library's Selection"]}
+          />
+        </div>
+        <div className="flex gap-2 items-center font-extralight text-sm">
+          <Link to="/">Home</Link>
+          <FaAnglesRight />
+          <Link>Add Book</Link>
+        </div>
       </div>
-
-      <div className="w-full lg:w-[60%] mx-auto bg-stone-400 bg-opacity-35 rounded-lg p-5 mb-4">
+      {/* Form Part */}
+      <div className="w-full lg:w-[60%]  mx-auto shadow-2xl p-5 mb-4">
         <div className="p-3 m-3 ">
           <form onSubmit={handleAddSpot}>
             <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-3 full mx-auto">
@@ -79,6 +89,8 @@ function AddBook() {
                   name="bookName"
                   type="text"
                   className={inputCss}
+                  placeholder="Book Name"
+
                   required
                 />
               </div>
@@ -89,6 +101,8 @@ function AddBook() {
                   name="authorName"
                   type="text"
                   className={inputCss}
+                  placeholder="Author Name"
+
                   required
                 />
               </div>
@@ -107,7 +121,7 @@ function AddBook() {
               <div>
                 <label className={labelCss}>Category</label>
                 <select
-                  className="text-stone-800 input w-full max-w-xs"
+                  className="text-stone-800 border border-yellow input w-full max-w-xs"
                   name="category"
                 >
                   <option className="text-stone-800" value="">
@@ -159,7 +173,7 @@ function AddBook() {
                   Photo Url
                 </label>
                 <div className="flex">
-                  <span className="flex items-center px-3 pointer-events-none sm:text-sm rounded-l-md text-stone-50 bg-gradient-to-r from-[#612bd3] to-[#6e008f]  ">
+                  <span className="flex items-center px-3 pointer-events-none sm:text-sm rounded-l-md text-beige bg-black">
                     https://
                   </span>
                   <input
@@ -178,7 +192,7 @@ function AddBook() {
                 <label className={labelCss}>Short description</label>
                 <textarea
                   required
-                  className="block w-full text-stone-800 p-3"
+                  className="block w-full border border-yellow text-stone-800 p-3"
                   name="desc"
                   id=""
                   cols="20"

@@ -7,6 +7,7 @@ function ModalForm({handleBorrowBook}) {
   const { user } = useAuth();
   const [borrowedDate, setBorrowedDate] = useState(new Date());
   const [returnDate, setReturnDate] = useState(new Date());
+  const inputCss= "border w-full py-2 border-yellow"
 
 
   return (
@@ -15,7 +16,7 @@ function ModalForm({handleBorrowBook}) {
       <br />
       <input
         defaultValue={user.displayName}
-        className="w-full"
+        className={inputCss}
         disabled
         name="name"
         type="text"
@@ -25,7 +26,7 @@ function ModalForm({handleBorrowBook}) {
       <br />
       <input
         defaultValue={user.email}
-        className="w-full"
+        className={inputCss}
         name="email"
         disabled
         type="text"
@@ -35,7 +36,7 @@ function ModalForm({handleBorrowBook}) {
       <DatePicker
       name="borrowedDate"
       disabled
-        className="border p-2 rounded-md"
+        className={inputCss}
         selected={borrowedDate}
        
       />
@@ -43,11 +44,12 @@ function ModalForm({handleBorrowBook}) {
       <label htmlFor="">Return Date</label> <br />
       <DatePicker
       name="returnDate"
-        className="border p-2 rounded-md"
+        className={inputCss}
         selected={returnDate}
         onChange={(date) => setReturnDate(date)}
       />
-      <input type="submit" value="Submit" />
+      <br />
+      <input  className="w-full bg-black text-white mt-5 h-8 rounded" type="submit" value="Submit" />
     </form>
   );
 }

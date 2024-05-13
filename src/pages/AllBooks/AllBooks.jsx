@@ -6,6 +6,8 @@ import CardView from "./CardView";
 import TableView from "./TableView";
 import { Link } from "react-router-dom";
 import { FaAnglesRight } from "react-icons/fa6";
+import Swal from "sweetalert2";
+
 
 function AllBooks() {
   // Pagination
@@ -17,7 +19,7 @@ function AllBooks() {
   const axiosSecure = useAxiosSecure();
   const [allBooks, setAllBooks] = useState([]);
   const [count, setCount] = useState(false);
-  const [view, setView] = useState("");
+  const [view, setView] = useState("card");
 
   // For get data
   useEffect(() => {
@@ -44,6 +46,44 @@ function AllBooks() {
     getCount();
   }, []);
 
+  const handleDelete = (id) => {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          axiosSecure.delete(`books/${id}`).then((data) => console.log(data));
+          swalWithBootstrapButtons.fire({
+            title: "Deleted!",
+            text: "Your Book has been deleted.",
+            icon: "success",
+          });
+          const remaining = allBooks.filter((book) => book._id !== id);
+          setAllBooks(remaining);
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire({
+            title: "Cancelled",
+            text: "Your Book is safe :)",
+            icon: "error",
+          });
+        }
+      });
+  };
 
   // Setting pages
   const numberOfPages = Math.ceil(bookCount / itemsPerPage);
@@ -51,6 +91,7 @@ function AllBooks() {
 
   return (
     <div>
+      {/* Black Part */}
       <div className="bg-black h-52 flex flex-col justify-center items-center mt-12 text-beige">
         <h1 className="text-4xl font-bold">Our Books</h1>
         <div className="flex gap-2 items-center font-extralight text-sm">
@@ -59,13 +100,13 @@ function AllBooks() {
           <Link>Books</Link>
         </div>
       </div>
-
+      {/* Bottom Part */}
       <div className="mt-12">
         <div>
           <div className="flex justify-between items-center">
             <div className="flex gap-2 items-center">
               <div>
-                <button
+                {/* <button
                   onClick={(e) => setView("card")}
                   className="rounded-l-xl border-2 px-4 py-2"
                 >
@@ -76,9 +117,14 @@ function AllBooks() {
                   className="rounded-r-xl border-2 px-4 py-2"
                 >
                   <CiViewTable />
-                </button>
+                </button> */}
+                <select className="px-4 py-2 border border-black" onChange={(e)=>setView(e.target.value)} name="view" id="">
+                  <option value="">---Please Select View---</option>
+                <option value="card">Grid View</option>
+                <option value="table">Table View</option>
+                </select>
+               
               </div>
-              <p>Showing All {allBooks.length} results</p>
             </div>
             <div className="">
               <button
@@ -98,7 +144,7 @@ function AllBooks() {
 
           <div className="mt-12">
             {view === "card" ? (
-              <CardView allBooks={allBooks}></CardView>
+              <CardView handleDelete={handleDelete} allBooks={allBooks}></CardView>
             ) : (
               <TableView allBooks={allBooks}></TableView>
             )}

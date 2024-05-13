@@ -53,19 +53,9 @@ function Login() {
       {/* <Helmet>
         <title>Login</title>
       </Helmet> */}
-      <div className="flex flex-col md:flex-row lg:flex-row">
-        <div className="w-full  md:w-[75%] lg:w-[80%] min-h-screen relative">
-          <video
-            autoPlay
-            loop
-            muted
-            className="absolute min-h-dvh object-cover inset-0 "
-          >
-            <source
-              src="https://assets.mixkit.co/videos/preview/mixkit-venice-central-canal-at-night-4646-large.mp4"
-              type="video/mp4"
-            />
-          </video>
+      <div className="flex flex-col md:flex-row lg:flex-row my-20">
+        <div className="w-full  md:w-[75%] lg:w-[40%] min-h-screen relative">
+          <img className="w-full h-full" src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=1856&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
         </div>
         {/* Form */}
         <div
@@ -75,7 +65,7 @@ function Login() {
           data-aos-duration="1000"
           data-aos-easing="ease-in-out"
           data-aos-mirror="true"
-          className=" w-full md:w-[55%] lg:w-[45%] p-8 space-y-3 rounded-xl bg-stone-100 text-stone-700 "
+          className=" w-full shadow-xl bg-yellow/10 md:w-[55%] lg:w-[60%] p-8 space-y-3  bg-stone-100 text-stone-700 "
         >
           <h1 className="text-2xl font-bold text-center">Login</h1>
           <form onSubmit={handleLogin} className="space-y-6">
@@ -87,7 +77,7 @@ function Login() {
                 type="text"
                 name="email"
                 placeholder="Email"
-                className="w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-stone-800 focus:border-violet-600"
+                className="w-full border px-4 py-3 rounded-md border-black bg-gray-50 text-stone-800 focus:border-violet-600"
               />
             </div>
             <div className="space-y-1 text-sm relative">
@@ -101,7 +91,7 @@ function Login() {
                 type={showPass ? "text" : "password"}
                 name="password"
                 placeholder="Password"
-                className="w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-stone-800 focus:border-violet-600 relative"
+                className="w-full px-4 py-3 rounded-md border-black border   text-stone-800 focus:border-violet-600 relative"
               />
             </div>
             <div
@@ -113,7 +103,7 @@ function Login() {
             {error && <small className="text-red-500 text-left">{error}</small>}
 
             <input
-              className="block w-full p-3 text-center rounded-lg text-stone-50 bg-gradient-to-r from-[#612bd3] to-[#6e008f] font-semibold"
+              className="block w-full p-3 text-center rounded-lg  bg-black text-white font-semibold"
               type="submit"
               value="Sign In"
             />

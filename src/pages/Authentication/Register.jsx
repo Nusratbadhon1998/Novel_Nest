@@ -41,7 +41,7 @@ function Register() {
           setError("Password should contain at-least one uppercase");
         return;
       } else if (!specialCharRegex.test(password)) {
-        toast.error("Password should contain at-least one lowercase", {
+        toast.error("Password should contain one special character", {
             position: "top-right",
             autoClose: 2000,
           }),
@@ -76,17 +76,10 @@ function Register() {
     }
   };
   return (
-    <div className="flex flex-col md:flex-row lg:flex-row">
+    <div className="flex flex-col md:flex-row lg:flex-row my-20">
       
-      <div className="w-full  md:w-[75%] lg:w-[80%] min-h-screen relative">
-        <video
-          autoPlay
-          loop
-          muted
-          className="absolute min-h-dvh object-cover inset-0 "
-        >
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-venice-central-canal-at-night-4646-large.mp4" type="video/mp4" />
-        </video>
+      <div className="w-full  md:w-[75%] lg:w-[40%] min-h-screen relative">
+        <img className="w-full h-full" src="https://images.unsplash.com/photo-1699523525646-ae96e089474f?q=80&w=1895&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
       </div>
 
       <div
@@ -96,7 +89,7 @@ function Register() {
         data-aos-duration="1000"
         data-aos-easing="ease-in-out"
         data-aos-mirror="true"
-        className=" w-full md:w-[55%] lg:w-[45%] p-8 space-y-3 rounded-xl bg-stone-100 text-stone-700 "
+        className=" w-full bg-yellow/10 md:w-[55%] lg:w-[60%] p-8 space-y-3 rounded-xl bg-stone-100 text-stone-700 "
       >
         <h1 className="text-2xl font-bold text-center">Register</h1>
         <form onSubmit={handleRegister} className="space-y-6">
@@ -108,7 +101,7 @@ function Register() {
               type="text"
               name="name"
               placeholder="Username"
-              className="w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-stone-800 focus:border-violet-600"
+              className="w-full border border-black px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-stone-800 focus:border-violet-600"
             />
           </div>
           <div className="space-y-1 text-sm">
@@ -119,7 +112,7 @@ function Register() {
               type="text"
               name="email"
               placeholder="email"
-              className="w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-stone-800 focus:border-violet-600"
+              className="w-full border border-black px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-stone-800 focus:border-violet-600"
             />
           </div>
           <div className="space-y-1 text-sm">
@@ -130,7 +123,7 @@ function Register() {
               type="text"
               name="photo"
               placeholder="Photo URL"
-              className="w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-stone-800 focus:border-violet-600"
+              className="w-full border border-black px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-stone-800 focus:border-violet-600"
             />
           </div>
           <div className="space-y-1 text-sm relative">
@@ -142,7 +135,7 @@ function Register() {
               name="password"
               id="password"
               placeholder="Password"
-              className="w-full px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-stone-800 focus:border-violet-600 "
+              className="w-full  border border-black px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-stone-800 focus:border-violet-600 "
             />
             <div
               className="absolute right-3 bottom-4"
@@ -151,23 +144,23 @@ function Register() {
               {showPass ? <HiOutlineEye /> : <HiOutlineEyeOff />}
             </div>
             {error && (
-              <small className="font-semibold mt-12 text-left text-red-500">
+              <small className="font-semibold mt-12 text-left text-red">
                 {error}
               </small>
             )}
           </div>
 
           <input
-            className="block w-full p-3 text-center rounded-lg text-stone-50 bg-gradient-to-r from-[#612bd3] to-[#6e008f] font-semibold"
+            className="block w-full p-3 text-center rounded-lg bg-black text-white font-semibold"
             type="submit"
             value="Sign Up"
           />
         </form>
 
-        <p className="text-xs text-center sm:px-6 text-gray-600">
+        <p className="text-base text-center sm:px-6 text-gray-600">
           Already have an account?
-          <Link to="/login" className="underline text-gray-800">
-            Log In
+          <Link to="/login" className="underline font-bold">
+             Log In
           </Link>
         </p>
       </div>
