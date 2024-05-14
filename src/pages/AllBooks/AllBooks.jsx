@@ -103,21 +103,9 @@ function AllBooks() {
       {/* Bottom Part */}
       <div className="mt-12">
         <div>
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col lg:flex-row gap-6 justify-between items-center">
             <div className="flex gap-2 items-center">
               <div>
-                {/* <button
-                  onClick={(e) => setView("card")}
-                  className="rounded-l-xl border-2 px-4 py-2"
-                >
-                  <MdGridView />
-                </button>
-                <button
-                  onClick={() => setView("table")}
-                  className="rounded-r-xl border-2 px-4 py-2"
-                >
-                  <CiViewTable />
-                </button> */}
                 <select className="px-4 py-2 border border-black" onChange={(e)=>setView(e.target.value)} name="view" id="">
                   <option value="">---Please Select View---</option>
                 <option value="card">Grid View</option>
