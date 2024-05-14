@@ -20,8 +20,8 @@ function AddBook() {
   const handleAddSpot = async (e) => {
     e.preventDefault();
     const form = e.target;
-    const bookName = form.bookName.value;
-    const authorName = form.authorName.value;
+    const name = form.bookName.value;
+    const author = form.authorName.value;
     const rating = form.rating.value;
     const quantity = form.quantity.value;
     const contents = form.contents.value;
@@ -35,8 +35,8 @@ function AddBook() {
     }
 
     const bookInfo = {
-      bookName,
-      authorName,
+      name,
+      author,
       rating,
       quantity,
       contents,
@@ -157,11 +157,11 @@ function AddBook() {
               </div>
               {/* Contents */}
               <div>
-                <label className={labelCss}>Contents</label>
+                <label className={labelCss}>Short Description</label>
                 <input
-                  name="contents"
+                  name="desc"
                   type="text"
-                  placeholder="Book Content"
+                  placeholder="Book description"
                   className={inputCss}
                   required
                 />
@@ -189,11 +189,11 @@ function AddBook() {
 
               {/* Short desc */}
               <div>
-                <label className={labelCss}>Short description</label>
+                <label className={labelCss}>Contents</label>
                 <textarea
                   required
                   className="block w-full border border-yellow text-stone-800 p-3"
-                  name="desc"
+                  name="contents"
                   id=""
                   cols="20"
                   rows="7"

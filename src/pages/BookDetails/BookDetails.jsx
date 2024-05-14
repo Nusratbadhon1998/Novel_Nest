@@ -105,7 +105,7 @@ function BookDetails() {
           <div>
             <button
               disabled={quantity === 0}
-              className="border border-black px-4 py-2 bg-black text-white"
+              className={`border border-black px-4 py-2 bg-black  ${quantity===0? "text-ash":"text-white"}`}
               onClick={() => document.getElementById("my_modal_5").showModal()}
             >
               Borrow Book

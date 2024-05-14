@@ -40,7 +40,7 @@ function BookCategoryCard({ bookInfo,fromAll }) {
         <div className="flex justify-between items-center">
         <h2 className="card-title">{name}</h2>
           <div className="flex gap-2 items-center">
-            <MdPerson4 /> <p className="italic text-sm">{author}</p>
+            <MdPerson4 /> <p className="italic text-sm text-black">{author}</p>
           </div>
         </div>
 

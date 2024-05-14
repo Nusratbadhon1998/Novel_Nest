@@ -99,21 +99,21 @@ function Types() {
               <Tab>Best Sellers</Tab>
             </TabList>
             <TabPanels className="mt-3">
-              <TabPanel className="grid grid-cols-3 gap-12 max-w-7xl">
+              <TabPanel className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-7xl">
                 {books
                   .filter((book) => book.types === "new release")
                   .map((b) => (
                     <PickCard book={b}></PickCard>
                   ))}
               </TabPanel>
-              <TabPanel className="grid grid-cols-3 max-w-7xl">
+              <TabPanel className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3  max-w-7xl">
                 {books
                   .filter((book) => book.types === "award winners")
                   .map((b) => (
                     <PickCard book={b}></PickCard>
                   ))}
               </TabPanel>
-              <TabPanel className="grid grid-cols-3 gapy-7 gap-12 max-w-7xl">
+              <TabPanel className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gapy-7 gap-12 max-w-7xl">
                 {books
                   .filter((book) => book.types === "best seller")
                   .map((b) => (

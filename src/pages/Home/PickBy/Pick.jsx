@@ -23,7 +23,7 @@ function Pick() {
       <p>Discover Your Next Read: Books That Truly Matter! Explore titles that leave a lasting impact on readers</p>
      </div>
 
-      <div className="flex gap-3">
+      <div className="flex flex-col lg:flex-row gap-3">
         {books.slice(0,4).map((book) => (
           <PickCard book={book} key={book._id}></PickCard>
         ))}
