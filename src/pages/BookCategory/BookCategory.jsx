@@ -9,6 +9,8 @@ function BookCategory() {
   const { categoryName } = useParams();
   const axiosBase = useAxios();
   const [books, setBooks] = useState([]);
+
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -21,6 +23,8 @@ function BookCategory() {
 
     getData();
   }, []);
+
+
 
   return (
   <div>

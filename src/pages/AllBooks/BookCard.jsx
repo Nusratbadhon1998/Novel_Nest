@@ -1,4 +1,3 @@
-import { CiLocationOn } from "react-icons/ci";
 import { MdPerson4 } from "react-icons/md";
 import { FaRegStar } from "react-icons/fa";
 import { FaStar } from "react-icons/fa6";

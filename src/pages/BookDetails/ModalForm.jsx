@@ -49,7 +49,7 @@ function ModalForm({handleBorrowBook}) {
         onChange={(date) => setReturnDate(date)}
       />
       <br />
-      <input  className="w-full bg-black text-white mt-5 h-8 rounded" type="submit" value="Submit" />
+      <input  className="w-full cursor-pointer bg-black text-white mt-5 h-8 rounded" type="submit" value="Submit" />
     </form>
   );
 }

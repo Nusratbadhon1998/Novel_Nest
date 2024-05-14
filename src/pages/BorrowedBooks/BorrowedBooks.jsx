@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import RingLoader from "react-spinners/RingLoader";
+import PropagateLoader  from 'react-spinners/PropagateLoader'
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { LuBookOpenCheck } from "react-icons/lu";
 import NoBorrowedBooks from "./NoBorrowedBooks";
@@ -10,6 +11,7 @@ import { FaAnglesRight } from "react-icons/fa6";
 
 function BorrowedBooks() {
   const { user, loading } = useAuth();
+  const [bookLoading,setBookLoading]= useState(true)
   const [borrowedBooks, setBorrowedBooks] = useState([]);
   const axiosSecure = useAxiosSecure();
 
@@ -19,6 +21,7 @@ function BorrowedBooks() {
         if (user) {
           const { data } = await axiosSecure(`/borrowedBooks/${user.email}`);
           setBorrowedBooks([...data]);
+          setBookLoading(false)
         }
       } catch (err) {
         console.log(err);
@@ -28,9 +31,9 @@ function BorrowedBooks() {
     getData();
   }, [user]);
 
-  const handleReturn = async (id) => {
+  const handleReturn = async (id,email) => {
     try {
-      const { data } = await axiosSecure.delete(`/borrowedBooks/${id}`);
+      const { data } = await axiosSecure.delete(`/borrowedBooks?id=${id}&email=${email}`);
       if (data.deletedCount) {
         const updatedBooks = borrowedBooks.filter((book) => book.bookId !== id);
         setBorrowedBooks(updatedBooks);
@@ -41,11 +44,13 @@ function BorrowedBooks() {
     }
   };
 
+
+
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-[400px]">
+      <div className="flex justify-center items-center min-h-[600px]">
         <RingLoader
-          color="#6323c6"
+          color="#FFFF00"
           loading={loading}
           size={100}
           speedMultiplier={1}
@@ -54,6 +59,18 @@ function BorrowedBooks() {
     );
   }
 
+  if (bookLoading){
+    return (
+      <div className="flex justify-center items-center min-h-[600px]">
+        <PropagateLoader
+          color="#FFFF00"
+          loading={bookLoading}
+          size={20}
+          speedMultiplier={1}
+        />
+      </div>
+    );
+  }
   if (borrowedBooks.length <= 0) return <NoBorrowedBooks></NoBorrowedBooks>;
   return (
     <div>
@@ -104,7 +121,7 @@ function BorrowedBooks() {
                   <td>{book.returnDate}</td>
                   <th>
                     <button
-                      onClick={() => handleReturn(book.bookId)}
+                      onClick={() => handleReturn(book.bookId,book.email)}
                       className="px-4 py-2 flex items-center"
                     >
                       <LuBookOpenCheck className="w-8 h-8" />

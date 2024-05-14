@@ -5,6 +5,9 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { MdOutlineMenuBook } from "react-icons/md";
 import { toast } from "react-toastify";
 import { MdPerson4 } from "react-icons/md";
+import Rating from "react-rating";
+import { FaRegStar, FaStar } from "react-icons/fa";
+
 
 function BookDetails() {
   const [book, setBook] = useState("");
@@ -38,6 +41,7 @@ function BookDetails() {
     quantity,
     contents,
     description,
+    rating
   } = book;
 
   const handleBorrowBook = async (e) => {
@@ -57,6 +61,7 @@ function BookDetails() {
       bookName,
       image,
       category,
+      
     };
 
     try {
@@ -75,46 +80,47 @@ function BookDetails() {
 
   return (
     <div className="my-20">
-      <div className="flex gap-12">
-        <div className="h-[500px]">
+      <div className="flex flex-col lg:flex-row gap-12">
+        <div className="h-[500px] border rounded p-4">
           <img className="h-full w-full" src={image} alt="" />
         </div>
-        <div className="flex-1 flex flex-col justify-center items-start space-y-4">
-          <h1 className="text-4xl font-bold">
-            {bookName}{" "}
-            <sup>
+        <div className="flex-1 border rounded p-4 flex flex-col justify-center items-start space-y-4">
+        <sup>
               {quantity <= 0 ? (
                 <small className="text-sm text-red border rounded-lg px-4 -py-2 ">
                   Not Available
                 </small>
               ) : (
-                <small className="text-green border rounded-lg px-4 -py-2 text-sm">
+                <small className="text-green bg-[#e6f6e3] border rounded-lg px-4 -py-2 text-sm">
                   Available {quantity} pieces
                 </small>
               )}
             </sup>
+          <h1 className="text-4xl font-bold">
+            {bookName}{" "}
+          
           </h1>
-          <div>
+          <div className="flex gap-5">
             <p className="flex items-center gap-3 italic">
-              <MdPerson4 />
+              <MdPerson4 className="text-yellow" />
               {author}
-            </p>
-            <p></p>
+            </p> ||
+            <p>{category}</p>
           </div>
           <p ref={targetRef}>{contents}</p>
           <div>
             <button
               disabled={quantity === 0}
-              className={`border border-black px-4 py-2 bg-black  ${quantity===0? "text-ash":"text-white"}`}
+              className={`border border-black px-4 py-2 bg-black  ${quantity===0? "text-ash":"text-yellow"}`}
               onClick={() => document.getElementById("my_modal_5").showModal()}
             >
               Borrow Book
             </button>
             <dialog
               id="my_modal_5"
-              className="modal modal-bottom sm:modal-middle"
+              className="modal mx-auto  modal-bottom sm:modal-middle"
             >
-              <div className="modal-box  w-3/4 h-96">
+              <div className="modal-box  h-96">
                 <form method="dialog">
                   <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
                     ✕

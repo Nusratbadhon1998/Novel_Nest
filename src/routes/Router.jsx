@@ -57,9 +57,7 @@ export const router = createBrowserRouter([
       {
         path: "/book-categories/:categoryName",
         element: (
-          <PrivateRoute>
             <BookCategory></BookCategory>
-          </PrivateRoute>
         ),
       },
       {

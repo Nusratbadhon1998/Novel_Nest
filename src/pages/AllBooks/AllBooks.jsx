@@ -7,6 +7,7 @@ import TableView from "./TableView";
 import { Link } from "react-router-dom";
 import { FaAnglesRight } from "react-icons/fa6";
 import Swal from "sweetalert2";
+import { PropagateLoader } from "react-spinners";
 
 
 function AllBooks() {
@@ -20,6 +21,7 @@ function AllBooks() {
   const [allBooks, setAllBooks] = useState([]);
   const [count, setCount] = useState(false);
   const [view, setView] = useState("card");
+const [bookLoading,setBookLoading]= useState(true)
 
   // For get data
   useEffect(() => {
@@ -29,6 +31,7 @@ function AllBooks() {
           `/books?filter=${count}&page=${currentPage}&size=${itemsPerPage}`
         );
         setAllBooks([...data]);
+        setBookLoading(false)
       } catch (err) {
         console.log(err);
       }
@@ -85,6 +88,18 @@ function AllBooks() {
       });
   };
 
+  if (bookLoading){
+    return (
+      <div className="flex justify-center items-center min-h-[400px]">
+        <PropagateLoader
+          color="#FFFF00"
+          loading={bookLoading}
+          size={40}
+          speedMultiplier={1}
+        />
+      </div>
+    );
+  }
   // Setting pages
   const numberOfPages = Math.ceil(bookCount / itemsPerPage);
   const pages = [...Array(numberOfPages).keys()].map((element) => element + 1);

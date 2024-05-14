@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function NoBorrowedBooks() {
   return (
-    <div className='flex flex-col justify-center items-center my-20 font-semibold'>
+    <div className='flex flex-col justify-center min-h-[600px] items-center my-20 font-semibold'>
 
         <BiConfused className='w-32 h-32' />
         <p className='text-4xl'>You haven't borrowed any book!!</p>

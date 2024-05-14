@@ -125,7 +125,7 @@ function Nav() {
               </p>
               <a
                 onClick={logOut}
-                class="relative px-4 py-2 overflow-hidden font-medium text-gray-600 bg-gray-100 border border-gray-100 shadow-inner group"
+                class="relative cursor-pointer px-4 py-2 overflow-hidden font-medium text-gray-600 bg-gray-100 border border-gray-100 shadow-inner group"
               >
                 <span class="absolute top-0 left-0 w-0 h-0 transition-all duration-200 border-t-2 border-yellow group-hover:w-full ease"></span>
                 <span class="absolute bottom-0 right-0 w-0 h-0 transition-all duration-200 border-b-2 border-yellow group-hover:w-full ease"></span>
@@ -140,7 +140,7 @@ function Nav() {
           ) : (
             <Link
               to="/login"
-              class="relative px-4 py-2 overflow-hidden font-medium text-gray-600 bg-gray-100 border border-gray-100 shadow-inner group"
+              class="relative cursor-pointer px-4 py-2 overflow-hidden font-medium text-gray-600 bg-gray-100 border border-gray-100 shadow-inner group"
             >
               <span class="absolute top-0 left-0 w-0 h-0 transition-all duration-200 border-t-2 border-yellow group-hover:w-full ease"></span>
               <span class="absolute bottom-0 right-0 w-0 h-0 transition-all duration-200 border-b-2 border-yellow group-hover:w-full ease"></span>
