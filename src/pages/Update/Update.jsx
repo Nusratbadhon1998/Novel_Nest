@@ -31,6 +31,7 @@ function Update() {
     const author = form.authorName.value;
     const rating = form.rating.value;
     const category = form.category.value;
+    console.log(category)
     const image = form.image.value;
 
     if (parseInt(rating) < 1 || parseInt(rating) > 5) {
@@ -51,7 +52,7 @@ function Update() {
       if (data.modifiedCount) {
         toast.success("Successfully Updated");
       }
-      navigate("/");
+      navigate("/all-books");
     } catch (err) {
       console.log(err);
     }
@@ -131,7 +132,7 @@ function Update() {
                   className="text-stone-800 border border-yellow input w-full max-w-xs"
                   name="category"
                 >
-                  <option className="text-stone-800" value="">
+                  <option className="text-stone-800" value={book.category}>
                     {book.category || "Please Choose Category"}
                   </option>
                   <option className="text-stone-800" value="Sci-Fi">

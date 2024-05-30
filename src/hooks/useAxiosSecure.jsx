@@ -1,30 +1,33 @@
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
-import useAuth from './useAuth'
-import { useEffect } from 'react'
+import axios from 'axios';
+import { useEffect } from 'react';
+import useAuth from './useAuth';
+
 const axiosSecure = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
   withCredentials: true,
-})
+});
 
 const useAxiosSecure = () => {
-  //  const { logOut } = useAuth();
-    // useEffect(() => {
-    //     axiosSecure.interceptors.response.use(res => {
-    //         return res;
-    //     }, error => {
-    //         console.log('error tracked in the interceptor', error.response)
-    //         if (error.response.status === 401 || error.response.status === 403) {
-    //             console.log('logout the user')
-    //                 .then(() => { 
-    //                     navigate('/login')
-    //                 })
-    //                 .catch(error => console.log(error))
-    //         }
-    //     })
-    // }, [])
+  const  logOut  = useAuth();
 
-    return axiosSecure;
-}
+  useEffect(() => {
+    axiosSecure.interceptors.response.use(
+      (res) => res,
+      (error) => {
+        console.log('error tracked in the interceptor', error.response);
+        if (error.response.status === 401 || error.response.status === 403) {
+          logOut()
+            .then(() => {
+              console.log("loh")
+            })
+            .catch((error) => console.log(error));
+        }
+        return Promise.reject(error);
+      }
+    );
+  }, [logOut]); // Add logOut and navigate to dependency array
 
-export default useAxiosSecure
+  return axiosSecure;
+};
+
+export default useAxiosSecure;

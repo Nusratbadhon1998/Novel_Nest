@@ -7,11 +7,13 @@ import { toast } from "react-toastify";
 import { MdPerson4 } from "react-icons/md";
 import Rating from "react-rating";
 import { FaRegStar, FaStar } from "react-icons/fa";
+import { PropagateLoader } from "react-spinners";
 
 
 function BookDetails() {
   const [book, setBook] = useState("");
   const axiosSecure = useAxiosSecure();
+  const [bookLoading,setBookLoading]= useState(true)
   const { id } = useParams();
 
   const navigate = useNavigate();
@@ -25,6 +27,7 @@ function BookDetails() {
       try {
         const { data } = await axiosSecure(`/books/${id}`);
         setBook(data);
+        setBookLoading(false)
       } catch (err) {
         console.log(err);
       }
@@ -32,6 +35,21 @@ function BookDetails() {
 
     getData();
   }, []);
+
+  if (bookLoading){
+   
+      return (
+        <div className="flex justify-center items-center min-h-[600px]">
+          <PropagateLoader
+            color="#FFFF00"
+            loading={bookLoading}
+            size={20}
+            speedMultiplier={1}
+          />
+        </div>
+      );
+    
+  }
   const {
     name: bookName,
     category,
@@ -101,11 +119,17 @@ function BookDetails() {
           
           </h1>
           <div className="flex gap-5">
-            <p className="flex items-center gap-3 italic">
+            <p className="flex justify-start items-center gap-3 italic">
               <MdPerson4 className="text-yellow" />
               {author}
             </p> ||
-            <p>{category}</p>
+            <p>{category}</p> ||
+            <p><Rating
+                emptySymbol={<FaRegStar className="text-yellow" />}
+                fullSymbol={<FaStar className="text-yellow" />}
+                initialRating={`${rating}`}
+                readonly
+              /></p>
           </div>
           <p ref={targetRef}>{contents}</p>
           <div>

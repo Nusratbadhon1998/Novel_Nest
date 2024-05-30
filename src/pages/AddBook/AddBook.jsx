@@ -49,7 +49,7 @@ function AddBook() {
       const { data } = await axiosSecure.post("/books", bookInfo);
       console.log(data);
       toast.success("Book Data Added Successfully!");
-      navigate("/");
+      navigate("/all-books");
     } catch (err) {
       console.log(err);
     }

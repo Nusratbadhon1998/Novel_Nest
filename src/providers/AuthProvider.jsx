@@ -29,6 +29,13 @@ function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const axiosSecure = useAxiosSecure();
 
+  // //Sign Out
+  const logOut = () => {
+    setLoading(false);
+    setUser(null);
+    return signOut(auth);
+  };
+
   // observer
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -36,21 +43,19 @@ function AuthProvider({ children }) {
       const loggedUser = { email: userEmail };
       setUser(currentUser);
       setLoading(false);
+
       // if user exists then issue a token
       if (currentUser) {
-        axiosSecure.post("/jwt",loggedUser)
-          .then((res) => {
-            console.log("token response", res.data);
-          });
+        axiosSecure.post("/jwt", loggedUser).then((res) => {
+          console.log("token response", res.data);
+        });
       } else {
-
-        axiosSecure.post("/logout",loggedUser)
-          .then((res) => {
-            console.log(res.data);
-          });
+        axiosSecure.post("/logout", loggedUser).then((res) => {
+          console.log(res.data);
+        });
       }
     });
-    
+
     return () => {
       return unsubscribe();
     };
@@ -75,16 +80,6 @@ function AuthProvider({ children }) {
       photoURL: photo,
     });
   };
-  // //Sign Out
-  const logOut = () => {
-    setLoading(false);
-    setUser(null);
-    return signOut(auth);
-  };
-
-
-
-
 
   //Google Sign IN
   const googleSignIn = () => {
